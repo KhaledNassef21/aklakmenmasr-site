@@ -46,8 +46,8 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-4">
+        {/* Cart Items with Scroll */}
+        <div className="max-h-[400px] overflow-y-auto p-4">
           {cart.length === 0 ? (
             <div className="text-center py-8">
               <ShoppingCart className="h-16 w-16 text-gray-300 mx-auto mb-4" />
