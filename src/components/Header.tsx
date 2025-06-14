@@ -39,7 +39,10 @@ const Header: React.FC<HeaderProps> = ({ currentPage, onPageChange }) => {
               {menuItems.map((item) => (
                 <button
                   key={item.key}
-                  onClick={() => onPageChange(item.key)}
+                  onClick={() => {
+                    onPageChange(item.key);
+                    window.scrollTo(0, 0); // 👈 التمرير لأعلى الصفحة
+                  }}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     currentPage === item.key
                       ? 'text-orange-600 bg-orange-50'
@@ -118,6 +121,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, onPageChange }) => {
                     onClick={() => {
                       onPageChange(item.key);
                       setIsMenuOpen(false);
+                      window.scrollTo(0, 0); // 👈 التمرير لأعلى الصفحة في الموبايل أيضًا
                     }}
                     className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors ${
                       currentPage === item.key
