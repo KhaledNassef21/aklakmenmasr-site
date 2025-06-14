@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,12 +25,17 @@ body {
   padding: 0;
 }
 
-/* Smooth transitions */
+/* Smooth transitions for all elements */
 * {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-/* Custom scrollbar */
+/* Smooth scroll behavior for anchor links (#) */ 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styles (for Webkit browsers like Chrome) */
 ::-webkit-scrollbar {
   width: 8px;
 }
