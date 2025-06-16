@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MessageCircle, Plus, Search, Book, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useCart } from '../contexts/CartContext';
@@ -11,6 +11,14 @@ const MenuPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedRecipe, setSelectedRecipe] = useState<string | null>(null);
+
+  // ⬇️ التمرير للأعلى يحدث هنا عند تغيير selectedRecipe
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [selectedRecipe]);
 
   const categories = [
     { key: 'all', label: language === 'ar' ? 'الكل' : 'All' },
