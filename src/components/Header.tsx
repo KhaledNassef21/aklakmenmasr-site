@@ -65,6 +65,16 @@ const Header: React.FC<HeaderProps> = ({ currentPage, onPageChange }) => {
                   {language === 'ar' ? 'English' : 'العربية'}
                 </span>
               </button>
+
+                {/* زر لوحة الإدارة */}
+            <button
+            onClick={() => {
+              window.location.href = '/admin';
+            }}
+            className="flex items-center space-x-2 rtl:space-x-reverse text-gray-700 hover:text-orange-600 transition-colors group"
+          >
+            <span className="text-sm font-medium group-hover:underline">لوحة الإدارة</span>
+              </button>
               
               <button 
                 onClick={() => setIsCartOpen(true)}
