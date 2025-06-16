@@ -1,48 +1,58 @@
 import React, { useState } from 'react';
-import { LanguageProvider } from './contexts/LanguageContext';
-import { CartProvider } from './contexts/CartContext';
-import Header from './components/Header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Pages
 import HomePage from './components/HomePage';
 import MenuPage from './components/MenuPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
+import AuthPage from './components/AuthPage'; // ⬅️ الصفحة الجديدة
+import AdminPage from './components/AdminPage'; // ⬅️ الصفحة الجديدة
+import ScrollToTopButton from './components/ScrollToTopButton';
+
+// Contexts
+import { LanguageProvider } from './contexts/LanguageContext';
+import { CartProvider } from './contexts/CartContext';
+
+// Components
+import Header from './components/Header';
 import Footer from './components/Footer';
-import ScrollToTopButton from './components/ScrollToTopButton'; // ⬅️ الزر الجديد
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
   const handlePageChange = (page: string) => {
     setCurrentPage(page);
-    window.scrollTo(0, 0); // التمرير للأعلى عند تغيير الصفحة
-  };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage onPageChange={handlePageChange} />;
-      case 'menu':
-        return <MenuPage />;
-      case 'about':
-        return <AboutPage />;
-      case 'contact':
-        return <ContactPage />;
-      default:
-        return <HomePage onPageChange={handlePageChange} />;
-    }
+    window.scrollTo(0, 0);
   };
 
   return (
     <LanguageProvider>
       <CartProvider>
-        <div className="min-h-screen flex flex-col">
-          <Header currentPage={currentPage} onPageChange={handlePageChange} />
-          <main className="flex-grow">
-            {renderPage()}
-          </main>
-          <Footer />
-          <ScrollToTopButton /> {/* ⬅️ هنا تم الإضافة */}
-        </div>
+        <Router>
+          <>
+            <Header currentPage={currentPage} onPageChange={handlePageChange} />
+
+            {/* التمرير للأعلى عند تغيير الصفحة */}
+            <ScrollToTopButton />
+
+            <main className="flex-grow">
+              <Routes>
+                {/* المسارات العادية */}
+                <Route path="/" element={<HomePage onPageChange={handlePageChange} />} />
+                <Route path="/menu" element={<MenuPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+
+                {/* المسارات الجديدة */}
+                <Route path="/auth" element={<AuthPage />} />
+                <Route path="/admin" element={<AdminPage />} />
+              </Routes>
+            </main>
+
+            <Footer />
+          </>
+        </Router>
       </CartProvider>
     </LanguageProvider>
   );
