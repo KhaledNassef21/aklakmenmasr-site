@@ -20,7 +20,7 @@ export const menuData: MenuItem[] = [
     name: { ar: 'كشري مصري', en: 'Egyptian Koshari' },
     description: { ar: 'كشري بالعدس والحمص والأرز والمكرونة مع الصلصة والدقة', en: 'Rice, lentils, chickpeas, pasta with tomato sauce and fried onions' },
     price: 25,
-    image: '/images/kushari.png',
+    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
     category: 'popular'
   },
   {
