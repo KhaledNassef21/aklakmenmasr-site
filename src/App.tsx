@@ -7,14 +7,20 @@ import MenuPage from './components/MenuPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton'; // ⬅️ الزر الجديد
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
+  const handlePageChange = (page: string) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0); // التمرير للأعلى عند تغيير الصفحة
+  };
+
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onPageChange={setCurrentPage} />;
+        return <HomePage onPageChange={handlePageChange} />;
       case 'menu':
         return <MenuPage />;
       case 'about':
@@ -22,7 +28,7 @@ function App() {
       case 'contact':
         return <ContactPage />;
       default:
-        return <HomePage onPageChange={setCurrentPage} />;
+        return <HomePage onPageChange={handlePageChange} />;
     }
   };
 
@@ -30,11 +36,12 @@ function App() {
     <LanguageProvider>
       <CartProvider>
         <div className="min-h-screen flex flex-col">
-          <Header currentPage={currentPage} onPageChange={setCurrentPage} />
+          <Header currentPage={currentPage} onPageChange={handlePageChange} />
           <main className="flex-grow">
             {renderPage()}
           </main>
           <Footer />
+          <ScrollToTopButton /> {/* ⬅️ هنا تم الإضافة */}
         </div>
       </CartProvider>
     </LanguageProvider>
